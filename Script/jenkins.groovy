@@ -12,9 +12,9 @@ node('windows') {
 
 			stage('Build') {
 				//withEnv( "BUILD_VERSION=${buildVersion}") 
-				{
+				//{
 					sh "./gradlew clean assemble"
-				}
+				//}
 			}
 
 			stage('Run Tests') {
