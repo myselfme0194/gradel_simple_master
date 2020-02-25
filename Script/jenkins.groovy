@@ -3,7 +3,7 @@ node('windows') {
 	def artifactoryPublishRepo = 'Gradel_master'
 
 	dir('jenkins') {
-		try {
+		 {
       
 
 			stage('Checkout') {
