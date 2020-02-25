@@ -11,7 +11,8 @@ node('windows') {
 			}
 
 			stage('Build') {
-				withEnv( "BUILD_VERSION=${buildVersion}") {
+				//withEnv( "BUILD_VERSION=${buildVersion}") 
+				{
 					sh "./gradlew clean assemble"
 				}
 			}
