@@ -1,5 +1,8 @@
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: "com.jfrog.artifactory"
+apply plugin: "org.sonarqube"
+apply plugin: 'maven-publish'
 
 group = 'com.github.jitpack'
 
@@ -8,6 +11,34 @@ targetCompatibility = 1.8
 
 repositories {
   mavenCentral()
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+buildscript {
+    repositories {
+     maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+        jcenter()
+        
+    }
+    dependencies {
+        //Check for the latest version here: http://plugins.gradle.org/plugin/com.jfrog.artifactory
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.13.0"
+        classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8"
+    }
 }
 
 dependencies {
@@ -23,10 +54,6 @@ task javadocJar(type: Jar, dependsOn: javadoc) {
     classifier = 'javadoc'
     from javadoc.destinationDir
 }
-plugin {
-  id "org.sonarqube" version "2.7"
-}
-
 
 artifacts {
     archives sourcesJar
@@ -47,7 +74,30 @@ install {
     }
   }
 }
-
+artifactory {
+    contextUrl = "${artifactory_contextUrl}"   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'devops_dummy'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+        defaults {
+   publications ('mavenJava')
+}
+    }
+    resolve {
+        repository {
+            repoKey = 'devops_dummy'
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+            maven = true
+            
+        }
+    }
+}
 wrapper {
     gradleVersion = "5.1.1"
     distributionType = Wrapper.DistributionType.ALL
