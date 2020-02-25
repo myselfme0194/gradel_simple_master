@@ -3,7 +3,7 @@ node('windows') {
 	def artifactoryPublishRepo = 'Gradel_master'
 
 	dir('jenkins') {
-		 {
+		
       
 
 			stage('Checkout') {
@@ -37,7 +37,7 @@ node('windows') {
 				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'devopspipeline_artifactory_credential_id', usernameVariable: 'artifactoryUsername', passwordVariable: 'artifactoryPassword']]) {
 					withEnv(["JAVA_HOME=${jdkHome}", "BUILD_VERSION=${buildVersion}", "GRADLE_OPTS=-Dartifactory.publish.repo.user=${env.artifactoryUsername} -Dartifactory.publish.repo=${artifactoryPublishRepo} -Dartifactory.publish.repo.pwd=${env.artifactoryPassword}"]) {
 						sh "./gradlew artifactoryPublish"
-					}
+					
 				}
 			}
 
