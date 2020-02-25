@@ -17,7 +17,7 @@ node('windows') {
 			}
 
 			stage('Run Tests') {
-				withEnv( "BUILD_VERSION=${buildVersion}"]) {
+				withEnv( "BUILD_VERSION=${buildVersion}") {
 					try {
 						sh "./gradlew build"
 					}
@@ -28,7 +28,7 @@ node('windows') {
 			}
 
 			stage('Sonar scan') {
-				withEnv( "BUILD_VERSION=${buildVersion}", "GRADLE_OPTS=-Dsonar.host.url=${env.SONAR_URL} -Dsonar.login=${env.SONAR_CRED_ID}"]) {
+				withEnv( ["BUILD_VERSION=${buildVersion}", "GRADLE_OPTS=-Dsonar.host.url=${env.SONAR_URL} -Dsonar.login=${env.SONAR_CRED_ID}"]) {
 					sh "./gradlew sonarqube"
 				}
 			}
