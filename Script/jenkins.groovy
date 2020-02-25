@@ -41,17 +41,7 @@ node('windows') {
 				}
 			}
 
-			stage('Notify') {
-				notify 'Success', 'was successful', buildVersion, false
-			}
-		}
-		catch(err) {
-			notify 'Failure', 'failed', buildVersion, true
-			throw err
-		}
+			
 	}
 }
 
-def notify(status, bodyMessage, buildVersion, attachBuildLog) {
-	emailext subject: "${env.JOB_NAME} $buildVersion Build $status", body: "The ${env.JOB_NAME} $buildVersion build $bodyMessage", to: 'Dhwajad.Kulkarni@aig.com', mimeType: 'text/html', attachLog: attachBuildLog
-}
