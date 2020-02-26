@@ -15,14 +15,15 @@ repositories {
   
 sonarqube {
     properties {
-        property "sonar.sourceEncoding", "UTF-8"
+       
+       property 'sonar.projectName', projectName
     }
 }
-sonarqube {
-    properties {
-        property 'sonar.projectName', projectName
-    }
-}
+//sonarqube {
+  //  properties {
+  //      property "sonar.sourceEncoding", "UTF-8"
+   // }
+//}
 
 
   
