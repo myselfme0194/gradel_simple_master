@@ -13,23 +13,19 @@ node('linux') {
 
 			stage('Build') {
 				//withEnv( "BUILD_VERSION=${buildVersion}"){
-					try {
+						sh "./gradlew clean assemble"
+				//}
+			}
+
+			stage('Run Tests') {
+				//withEnv( "BUILD_VERSION=${buildVersion}") {
+				try {
 						sh "./gradlew build"
 					}
 					finally {
 						step([$class: 'JUnitResultArchiver', testResults: '**/test-results/**/*.xml'])
 					}
-				//}
-			}
-
-			stage('Run Tests') {
-				withEnv( "BUILD_VERSION=${buildVersion}") {
-					
-						sh "./gradlew build"
-					
-					
-				}
-			}
+			//}
 
 			stage('Sonar scan') {
 				withEnv( ["BUILD_VERSION=${buildVersion}", "GRADLE_OPTS=-Dsonar.host.url=${env.SONAR_URL} -Dsonar.login=${env.SONAR_CRED_ID}"]) {
