@@ -28,14 +28,12 @@ node('linux') {
 			}
 
 			stage('Publish to Artifactory') {
-				
 					withEnv("GRADLE_OPTS=-Dartifactory.host.url= http://52.38.91.61:8081-Dartifactory.publish.repo.user=admin -Dartifactory.publish.repo=Gradel_master -Dartifactory.publish.repo.pwd=admin@123) {
 						sh "./gradlew artifactoryPublish"
 					}
-				
 			}
 
 			
-	}
+	
 }
 }
