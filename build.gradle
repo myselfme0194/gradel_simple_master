@@ -2,7 +2,9 @@
 // The above triggers groovy syntax highlighting in vim
 apply plugin: 'java'
 apply plugin: 'maven'
+apply plugin: "com.jfrog.artifactory"
 apply plugin: "org.sonarqube"
+apply plugin: 'maven-publish'
 
 group = 'gradel_master'
 def projectName = 'gradel_master'
@@ -23,6 +25,14 @@ sonarqube {
     }
 }
 
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+}
+
 buildscript {
   repositories {
     maven {
@@ -32,6 +42,7 @@ buildscript {
 dependencies {
 
   classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8"
+  classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.13.0"
 }
 }
 
