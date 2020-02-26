@@ -17,7 +17,7 @@ node('linux') {
 					sh "./gradlew build"
 				}
 				finally {
-					step([$class: 'JUnitResultArchiver', testResults: '**/test-results/**/*.xml'])
+					step([$class: 'JUnitResultArchiver',allowEmptyResults: true, testResults: '**/test-results/**/*.xml'])
 					}
 				}
 
