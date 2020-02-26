@@ -20,20 +20,7 @@ sonarqube {
     }
 }
 
-pluginBundle {
-  website = docUrl
-  vcsUrl = githubUrl
 
-  description = project.description
-  tags = ['sonarqube', 'sonar', 'quality', 'qa']
-
-  plugins {
-
-    sonarqubePlugin {
-      id = 'org.sonarqube'
-      displayName = projectName
-    }
-}
   mavenCoordinates {
     groupId = project.group
     artifactId = "sonarqube-gradle-plugin"
