@@ -15,7 +15,7 @@ repositories {
   
 sonarqube {
     properties {
-        property 'sonar.projectName', projectName
+        property "sonar.sourceEncoding", "UTF-8"
     }
 }
 sonarqube {
