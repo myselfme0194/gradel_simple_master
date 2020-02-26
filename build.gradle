@@ -20,6 +20,20 @@ sonarqube {
     }
 }
 
+pluginBundle {
+  website = docUrl
+  vcsUrl = githubUrl
+
+  description = project.description
+  tags = ['sonarqube', 'sonar', 'quality', 'qa']
+
+  plugins {
+
+    sonarqubePlugin {
+      id = 'org.sonarqube'
+      displayName = projectName
+    }
+}
 buildscript {
   repositories {
     maven {
