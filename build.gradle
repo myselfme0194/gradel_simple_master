@@ -1,9 +1,8 @@
 #!groovy
+// The above triggers groovy syntax highlighting in vim
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: "org.sonarqube"
-
-group = 'gradel_master'
 
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
@@ -11,6 +10,7 @@ targetCompatibility = 1.8
 repositories {
   mavenCentral()
 }
+
   
 sonarqube {
     properties {
@@ -25,12 +25,9 @@ buildscript {
     }
   }
 dependencies {
+
   classpath "org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:2.8"
 }
-}
-
-dependencies {
-  compile 'com.google.guava:guava:18.0'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -47,6 +44,8 @@ artifacts {
     archives sourcesJar
     archives javadocJar
 }
+
+// To specify a license in the pom:
 install {
   repositories.mavenInstaller {
     pom.project {
@@ -56,7 +55,7 @@ install {
           url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
           distribution 'repo'
         }
-      }
+      } 
     }
   }
 }
