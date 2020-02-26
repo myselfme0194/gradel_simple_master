@@ -1,47 +1,13 @@
 node('linux') {
-	def buildVersion = "1.0.0.${env.BUILD_NUMBER}"
-	def artifactoryPublishRepo = 'Gradel_master'
-
-	//dir('jenkins') {
-		
-      
-
-			stage('Checkout') {
-				git 'https://github.com/harsharameshh/gradel_simple_master.git'
-				sh 'chmod +x ./gradlew '
-			}
-
-			stage('Build') {
-				withEnv( "BUILD_VERSION=${buildVersion}") 
-				{
-					sh "./gradlew clean assemble"
-				}
-			}
-
-			stage('Run Tests') {
-				withEnv( "BUILD_VERSION=${buildVersion}") {
-					
-						sh "./gradlew build"
-					
-					
-				}
-			}
-
-			stage('Sonar scan') {
-				withEnv( ["BUILD_VERSION=${buildVersion}", "GRADLE_OPTS=-Dsonar.host.url=${env.SONAR_URL} -Dsonar.login=${env.SONAR_CRED_ID}"]) {
-					sh "./gradlew sonarqube"
-				}
-			}
-
-			stage('Publish to Artifactory') {
-				withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'devopspipeline_artifactory_credential_id', usernameVariable: 'artifactoryUsername', passwordVariable: 'artifactoryPassword']]) {
-					withEnv(["JAVA_HOME=${jdkHome}", "BUILD_VERSION=${buildVersion}", "GRADLE_OPTS=-Dartifactory.publish.repo.user=${env.artifactoryUsername} -Dartifactory.publish.repo=${artifactoryPublishRepo} -Dartifactory.publish.repo.pwd=${env.artifactoryPassword}"]) {
-						sh "./gradlew artifactoryPublish"
-					
-				}
-			//}
-
-			
-	}
-}
+   
+   stage('Preparation') { 
+      git 'https://github.com/harsharameshh/gradel_simple_master.git'
+      sh 'chmod +x ./gradlew '
+   }
+   stage('Build') 
+   {
+                sh "pwd";
+         	sh "./gradlew   clean assemble "
+   }
+  
 }
