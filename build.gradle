@@ -4,6 +4,9 @@ apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: "org.sonarqube"
 
+group = 'gradel_master'
+def projectName = 'gradel_master'
+
 sourceCompatibility = 1.8 // java 8
 targetCompatibility = 1.8
 
@@ -15,6 +18,8 @@ repositories {
 sonarqube {
     properties {
         property "sonar.sourceEncoding", "UTF-8"
+        property 'sonar.projectName', projectName
+        
     }
 }
 
