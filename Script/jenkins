@@ -8,13 +8,14 @@ node('windows') {
 
 			stage('Checkout') {
 				git url: 'https://github.com/harsharameshh/gradel_simple_master.git'
+				sh 'chmod +x ./gradlew '
 			}
 
 			stage('Build') {
-				//withEnv( "BUILD_VERSION=${buildVersion}") 
-				//{
+				withEnv( "BUILD_VERSION=${buildVersion}") 
+				{
 					sh "./gradlew clean assemble"
-				//}
+				}
 			}
 
 			stage('Run Tests') {
