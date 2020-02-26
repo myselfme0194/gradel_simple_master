@@ -19,12 +19,7 @@ sonarqube {
         property 'sonar.projectName', projectName
     }
 }
-plugins {
-    sonarqubePlugin {
-      id = 'org.sonarqube'
-      displayName = projectName
-    }
-  }
+
 buildscript {
   repositories {
     maven {
