@@ -21,11 +21,7 @@ sonarqube {
 }
 
 
-  mavenCoordinates {
-    groupId = project.group
-    artifactId = "sonarqube-gradle-plugin"
-  }
-}
+  
 buildscript {
   repositories {
     maven {
