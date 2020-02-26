@@ -7,7 +7,7 @@ node('linux') {
       
 
 			stage('Checkout') {
-				git url: 'https://github.com/harsharameshh/gradel_simple_master.git'
+				git 'https://github.com/harsharameshh/gradel_simple_master.git'
 				sh 'chmod +x ./gradlew '
 			}
 
