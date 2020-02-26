@@ -20,12 +20,10 @@ node('linux') {
 
 			stage('Run Tests') {
 				withEnv( "BUILD_VERSION=${buildVersion}") {
-					try {
+					
 						sh "./gradlew build"
-					}
-					finally {
-						step([$class: 'JUnitResultArchiver', testResults: '**/test-results/**/*.xml'])
-					}
+					
+					
 				}
 			}
 
