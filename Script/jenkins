@@ -1,4 +1,4 @@
-node('windows') {
+node('linux') {
 	def buildVersion = "1.0.0.${env.BUILD_NUMBER}"
 	def artifactoryPublishRepo = 'Gradel_master'
 
