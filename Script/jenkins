@@ -28,12 +28,7 @@ node('linux') {
 			}
 
 			stage('Publish to Artifactory') {
-					withEnv() {
 						sh "./gradlew artifactoryPublish"
-					}
 			}
-
-			
-	
 }
 }
